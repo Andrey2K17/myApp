@@ -8,5 +8,6 @@ sealed class Resource<out T>(open val data: T?) {
 
     class Error<T>(
         data: T? = null,
+        val exception: Exception? = null
     ) : Resource<T>(data)
 }
