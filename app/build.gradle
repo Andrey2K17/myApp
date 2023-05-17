@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 apply from: '../dependencies.gradle'
@@ -55,6 +56,10 @@ dependencies {
     implementation hilt.core
     kapt hilt.androidCompiler
     kapt hilt.compiler
+
+    //Navigation
+    implementation navigation.fragment
+    implementation navigation.ui
 
     //Modules
     implementation project(path: ':domain')
