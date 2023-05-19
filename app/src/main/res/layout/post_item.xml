@@ -1,0 +1,62 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="body"
+            type="String" />
+
+        <import type="com.pg13.myapp.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/cardview_shadow_start_color"
+        android:layout_margin="@dimen/item_post_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_post_margin"
+                android:layout_weight="1"
+                android:text="@{title}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Test title" />
+
+            <CheckedTextView
+                android:id="@+id/favoriteCtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_post_margin"
+                app:resChecked="@{R.drawable.favorite}"
+                app:resUnchecked="@{R.drawable.add_favorite}" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/bodyTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_post_margin"
+            android:text="@{body}"
+            android:textSize="16sp"
+            tools:text="Test Body" />
+    </LinearLayout>
+</layout>

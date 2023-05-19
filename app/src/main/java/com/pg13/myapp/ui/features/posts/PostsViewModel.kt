@@ -1,4 +1,4 @@
-package com.pg13.myapp.features
+package com.pg13.myapp.ui.features.posts
 
 import androidx.lifecycle.ViewModel
 import com.pg13.myapp.domain.entites.Post

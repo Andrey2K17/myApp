@@ -34,6 +34,10 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    dataBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -54,6 +58,7 @@ dependencies {
 
     //Hilt
     implementation hilt.core
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     kapt hilt.androidCompiler
     kapt hilt.compiler
 

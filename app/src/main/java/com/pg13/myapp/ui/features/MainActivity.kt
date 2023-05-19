@@ -1,4 +1,4 @@
-package com.pg13.myapp.features
+package com.pg13.myapp.ui.features
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
