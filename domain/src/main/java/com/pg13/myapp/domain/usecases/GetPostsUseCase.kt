@@ -6,5 +6,5 @@ import com.pg13.myapp.domain.repositories.PostRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetPostsUseCase(private val repository: PostRepository) {
-    operator fun invoke(): Flow<Resource<List<Post>>> = repository.getPosts()
+    operator fun invoke(isFavorite: Boolean): Flow<Resource<List<Post>>> = repository.getPosts(isFavorite)
 }

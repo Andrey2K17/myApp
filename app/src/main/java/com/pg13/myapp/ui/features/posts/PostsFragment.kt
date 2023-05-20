@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.ConcatAdapter
 import com.pg13.myapp.R
 import com.pg13.myapp.databinding.FragmentPostsBinding
 import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.entites.Resource
 import com.pg13.myapp.ui.base.ViewBindingFragment
+import com.pg13.myapp.utils.launchOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class PostsFragment : ViewBindingFragment<FragmentPostsBinding>() {
@@ -24,25 +21,66 @@ class PostsFragment : ViewBindingFragment<FragmentPostsBinding>() {
         PostAdapter(this::adapterOnClick, this::adapterOnClickFavorite)
     }
 
+    private val adapterFavorite: PostAdapter by lazy {
+        PostAdapter(this::adapterOnClick, this::adapterOnClickFavorite)
+    }
+
+    private val concatAdapter: ConcatAdapter by lazy {
+        ConcatAdapter(adapter)
+    }
+
     override fun getLayoutId() = R.layout.fragment_posts
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
-            recyclerView.adapter = adapter
+            recyclerView.adapter = concatAdapter
+
+
+            loadAllBtn.setOnClickListener {
+                if (!concatAdapter.adapters.contains(adapter)) {
+                    viewModel.updatePosts()
+                    concatAdapter.addAdapter(adapter)
+                }
+                if (concatAdapter.adapters.contains(adapterFavorite)) {
+                    concatAdapter.removeAdapter(adapterFavorite)
+                }
+            }
+
+            loadFavoriteBtn.setOnClickListener {
+                if (!concatAdapter.adapters.contains(adapterFavorite)) {
+                    viewModel.updatePosts(true)
+                    concatAdapter.addAdapter(adapterFavorite)
+                }
+
+                if (concatAdapter.adapters.contains(adapter)) {
+                    concatAdapter.removeAdapter(adapter)
+                }
+            }
+
+            refreshLayout.setOnRefreshListener {
+                viewModel.updatePosts()
+            }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.posts.collect { res ->
-                    Log.d("test123", "res: $res")
-                    when (res) {
-                        is Resource.Success -> {
+        viewLifecycleOwner.launchOnLifecycle {
+            viewModel.posts.collect { res ->
+                when (res) {
+                    is Resource.Success -> {
+                        if (viewModel.isFavorite) {
+                            adapterFavorite.submitList(res.data)
+                        } else {
                             adapter.submitList(res.data)
                         }
-                        is Resource.Loading -> {}
-                        is Resource.Error -> {}
+                        binding.refreshLayout.isRefreshing = false
+                    }
+
+                    is Resource.Loading -> {
+                        binding.refreshLayout.isRefreshing = true
+                    }
+
+                    is Resource.Error -> {
+                        binding.refreshLayout.isRefreshing = false
                     }
                 }
             }
@@ -55,5 +93,6 @@ class PostsFragment : ViewBindingFragment<FragmentPostsBinding>() {
 
     private fun adapterOnClickFavorite(post: Post) {
         Log.d("test123", "postClickFavorite: $post")
+        viewModel.addPostFavorite(post)
     }
 }

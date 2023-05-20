@@ -27,10 +27,13 @@ class PostAdapter(private val onClick: (Post) -> Unit, private val onClickFavori
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
-        holder.binding.title = post.title
-        holder.binding.body = post.body
+        holder.binding.post = post
         holder.binding.root.setOnClickListener { onClick(post) }
-        holder.binding.favoriteCtv.setOnClickListener { onClickFavorite(post) }
+        holder.binding.favoriteCtv.setOnClickListener {
+            val favorite = post.favorite
+            holder.binding.favoriteCtv.setCheckMarkDrawable(if (favorite) R.drawable.add_favorite else R.drawable.favorite)
+            onClickFavorite(post.also { it.favorite = !it.favorite })
+        }
     }
 }
 

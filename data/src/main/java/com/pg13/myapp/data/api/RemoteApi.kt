@@ -1,6 +1,6 @@
 package com.pg13.myapp.data.api
 
-import com.pg13.myapp.data.entities.PostRemote
+import com.pg13.myapp.data.entities.remote.PostRemote
 import retrofit2.Response
 import retrofit2.http.GET
 

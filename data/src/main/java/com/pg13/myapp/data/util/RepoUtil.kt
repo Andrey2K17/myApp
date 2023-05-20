@@ -14,7 +14,6 @@ internal inline fun <ResponseType, ResultType> networkBoundResource(
     emit(Resource.Loading())
 
     val result = remoteCall.invoke()
-
         try {
             when (result.code()) {
                 200 -> emit(Resource.Success(mapper(result.body()!!)))
@@ -23,4 +22,26 @@ internal inline fun <ResponseType, ResultType> networkBoundResource(
         } catch (e: Exception) {
             emit(Resource.Error(exception = e))
         }
+}
+
+internal inline fun <ResponseType, LocalType, ResultType> networkBoundResource(
+    crossinline remoteCall: suspend () -> Response<ResponseType>,
+    crossinline loadLocalData: suspend () -> LocalType?,
+    crossinline mapper: (ResponseType, LocalType) -> ResultType,
+): Flow<Resource<ResultType>> = flow {
+    emit(Resource.Loading())
+
+    // Сначала загружаем локальные данные
+    val localData: LocalType? = loadLocalData()
+
+    val result = remoteCall.invoke()
+
+    try {
+        when (result.code()) {
+            200 -> emit(Resource.Success(mapper(result.body()!!, localData!!)))
+            else -> emit(Resource.Error(exception = HttpException(result)))
+        }
+    } catch (e: Exception) {
+        emit(Resource.Error(exception = e))
+    }
 }

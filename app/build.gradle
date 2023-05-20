@@ -55,6 +55,7 @@ dependencies {
     implementation androidX.appCompat
     implementation androidX.material
     implementation androidX.constraintlayout
+    implementation androidX.recyclerview
 
     //Hilt
     implementation hilt.core

@@ -6,12 +6,8 @@
 
         <import type="android.view.View" />
         <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="body"
-            type="String" />
+            name="post"
+            type="com.pg13.myapp.domain.entites.Post" />
 
         <import type="com.pg13.myapp.R" />
     </data>
@@ -34,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_post_margin"
                 android:layout_weight="1"
-                android:text="@{title}"
+                android:text="@{post.title}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Test title" />
@@ -44,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_post_margin"
+                app:checkedChange="@{post.favorite}"
                 app:resChecked="@{R.drawable.favorite}"
                 app:resUnchecked="@{R.drawable.add_favorite}" />
 
@@ -55,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_post_margin"
-            android:text="@{body}"
+            android:text="@{post.body}"
             android:textSize="16sp"
             tools:text="Test Body" />
     </LinearLayout>

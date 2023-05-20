@@ -3,4 +3,6 @@
     <string name="main">Main</string>
     <string name="posts">Posts</string>
     <string name="users">Users</string>
+    <string name="all">Все</string>
+    <string name="Favorite">Избранные</string>
 </resources>
