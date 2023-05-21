@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pg13.myapp.R
 import com.pg13.myapp.databinding.PostItemBinding
-import com.pg13.myapp.domain.entites.Post
+import com.pg13.myapp.entities.PostUI
 
-class PostAdapter(private val onClick: (Post) -> Unit, private val onClickFavorite: (Post) -> Unit) :
-    ListAdapter<Post, PostAdapter.PostViewHolder>(PostDiffCallback) {
+class PostAdapter(private val onClick: (PostUI) -> Unit, private val onClickFavorite: (PostUI) -> Unit) :
+    ListAdapter<PostUI, PostAdapter.PostViewHolder>(PostDiffCallback) {
 
     class PostViewHolder(val binding: PostItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -37,12 +37,12 @@ class PostAdapter(private val onClick: (Post) -> Unit, private val onClickFavori
     }
 }
 
-object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+object PostDiffCallback : DiffUtil.ItemCallback<PostUI>() {
+    override fun areItemsTheSame(oldItem: PostUI, newItem: PostUI): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+    override fun areContentsTheSame(oldItem: PostUI, newItem: PostUI): Boolean {
         return oldItem.id == newItem.id
     }
 }

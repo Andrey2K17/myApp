@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">MyApp</string>
     <string name="main">Main</string>
-    <string name="posts">Posts</string>
+    <string name="posts">Посты</string>
     <string name="users">Users</string>
     <string name="all">Все</string>
     <string name="Favorite">Избранные</string>
+
+    <string name="dialog_title_error">Ошибка</string>
+    <string name="dialog_button_ok" >OK</string>
+
 </resources>

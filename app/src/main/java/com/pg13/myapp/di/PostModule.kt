@@ -6,7 +6,7 @@ import com.pg13.myapp.data.db.CacheDataSourceImpl
 import com.pg13.myapp.data.db.Database
 import com.pg13.myapp.data.db.PostDao
 import com.pg13.myapp.data.net.CloudDataSource
-import com.pg13.myapp.data.net.CloudDataSourceImpl
+import com.pg13.myapp.data.net.CloudDataSourcePostImpl
 import com.pg13.myapp.data.repositories.PostRepositoryImpl
 import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.repositories.PostRepository
@@ -56,7 +56,7 @@ class PostModule {
     @Singleton
     @Provides
     fun provideCloudDataSource(client: RemoteApi, dao: PostDao): CloudDataSource<Post> {
-        return CloudDataSourceImpl(client, dao)
+        return CloudDataSourcePostImpl(client, dao)
     }
 
     @Singleton

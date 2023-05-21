@@ -7,7 +7,7 @@ import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.entites.Resource
 import kotlinx.coroutines.flow.Flow
 
-class CloudDataSourceImpl(
+class CloudDataSourcePostImpl(
     private val postApi: RemoteApi,
     private val postDao: PostDao
 ): CloudDataSource<Post> {

@@ -9,5 +9,18 @@
         android:id="@+id/postsFragment"
         android:name="com.pg13.myapp.ui.features.posts.PostsFragment"
         android:label="@string/posts"
-        tools:layout="@layout/fragment_posts"/>
+        tools:layout="@layout/fragment_posts">
+        <action
+            android:id="@+id/action_postsFragment_to_postsDetailsFragment"
+            app:destination="@id/postsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postsDetailsFragment"
+        android:name="com.pg13.myapp.ui.features.posts.PostsDetailsFragment"
+        android:label="PostsDetailsFragment"
+        tools:layout="@layout/fragment_post_details">
+        <argument
+            android:name="post"
+            app:argType="com.pg13.myapp.entities.PostUI" />
+    </fragment>
 </navigation>

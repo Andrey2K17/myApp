@@ -2,10 +2,11 @@ package com.pg13.myapp.data.util
 
 import com.pg13.myapp.domain.entites.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import retrofit2.Response
-import java.lang.Exception
+import java.io.IOException
 
 internal inline fun <ResponseType, ResultType> networkBoundResource(
     crossinline remoteCall: suspend () -> Response<ResponseType>,
@@ -14,15 +15,11 @@ internal inline fun <ResponseType, ResultType> networkBoundResource(
     emit(Resource.Loading())
 
     val result = remoteCall.invoke()
-        try {
-            when (result.code()) {
-                200 -> emit(Resource.Success(mapper(result.body()!!)))
-                else -> emit(Resource.Error(exception = HttpException(result)))
-            }
-        } catch (e: Exception) {
-            emit(Resource.Error(exception = e))
-        }
-}
+    when (result.code()) {
+        200 -> emit(Resource.Success(mapper(result.body()!!)))
+        else -> emit(Resource.Error(exception = HttpException(result)))
+    }
+}.catchWithHandle()
 
 internal inline fun <ResponseType, LocalType, ResultType> networkBoundResource(
     crossinline remoteCall: suspend () -> Response<ResponseType>,
@@ -31,17 +28,24 @@ internal inline fun <ResponseType, LocalType, ResultType> networkBoundResource(
 ): Flow<Resource<ResultType>> = flow {
     emit(Resource.Loading())
 
-    // Сначала загружаем локальные данные
     val localData: LocalType? = loadLocalData()
-
     val result = remoteCall.invoke()
+    when (result.code()) {
+        200 -> emit(Resource.Success(mapper(result.body()!!, localData!!)))
+        else -> emit(Resource.Error(exception = HttpException(result)))
+    }
+}.catchWithHandle()
 
-    try {
-        when (result.code()) {
-            200 -> emit(Resource.Success(mapper(result.body()!!, localData!!)))
-            else -> emit(Resource.Error(exception = HttpException(result)))
-        }
-    } catch (e: Exception) {
-        emit(Resource.Error(exception = e))
+
+fun <T> Flow<Resource<T>>.catchWithHandle(): Flow<Resource<T>> = catch { exception ->
+    if (exception is IOException) {
+        emit(Resource.Error(exception = exception, message = "Ошибка доступа в интернет"))
+    } else {
+        emit(
+            Resource.Error(
+                exception = exception,
+                message = "Неизвестная ошибка\n${exception.message}"
+            )
+        ) // неизвестная ошибка
     }
 }

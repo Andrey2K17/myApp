@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -31,14 +30,6 @@ abstract class ViewBindingFragment<ViewBinding : ViewDataBinding> : Fragment() {
         //Timber.tag("FragmentLifecycle").d("${this.javaClass.simpleName}: onCreateView")
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            if (showSupportActionBar) {
-                if (!isShowing) show()
-            } else {
-                if (isShowing) hide()
-            }
-        }
 
         return binding.root
     }

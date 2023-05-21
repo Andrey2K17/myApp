@@ -2,4 +2,6 @@
 <resources>
     <dimen name="item_post_margin">8dp</dimen>
     <integer name="anim_duration_medium">300</integer>
+
+    <dimen name="corner_radius_dialog">8dp</dimen>
 </resources>
