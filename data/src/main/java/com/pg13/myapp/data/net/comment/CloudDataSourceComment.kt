@@ -1,4 +1,4 @@
-package com.pg13.myapp.data.net
+package com.pg13.myapp.data.net.comment
 
 import com.pg13.myapp.domain.entites.Resource
 import kotlinx.coroutines.flow.Flow

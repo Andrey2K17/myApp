@@ -48,4 +48,7 @@ ext {
             test    : "androidx.room:room-testing:$roomVersion",
             compiler: "androidx.room:room-compiler:$roomVersion"
     ]
+
+    //Load Image from Internet
+    coil = "io.coil-kt:coil:2.4.0"
 }

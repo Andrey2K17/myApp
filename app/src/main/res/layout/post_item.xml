@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/cardview_shadow_start_color"
-        android:layout_margin="@dimen/item_post_margin">
+        android:layout_margin="@dimen/padding_8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:id="@+id/titleTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_post_margin"
+                android:layout_margin="@dimen/padding_8dp"
                 android:layout_weight="1"
                 android:text="@{post.title}"
                 android:textSize="18sp"
@@ -39,7 +39,7 @@
                 android:id="@+id/favoriteCtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_post_margin"
+                android:layout_margin="@dimen/padding_8dp"
                 app:checkedChange="@{post.favorite}"
                 app:resChecked="@{R.drawable.favorite}"
                 app:resUnchecked="@{R.drawable.add_favorite}" />
@@ -51,7 +51,7 @@
             android:id="@+id/bodyTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_post_margin"
+            android:layout_margin="@dimen/padding_8dp"
             android:text="@{post.body}"
             android:textSize="16sp"
             tools:text="Test Body" />

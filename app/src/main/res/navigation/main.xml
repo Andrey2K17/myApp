@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.pg13.myapp.ui.features.MainFragment"
-        android:label="@string/main"
-        tools:layout="@layout/fragment_main"/>
+        android:name="com.pg13.myapp.ui.features.home.HomeFragment"
+        android:label="@string/albums"
+        tools:layout="@layout/fragment_home"/>
 </navigation>

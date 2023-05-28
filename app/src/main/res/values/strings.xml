@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">MyApp</string>
-    <string name="main">Main</string>
+    <string name="albums">Альбомы</string>
     <string name="posts">Посты</string>
     <string name="users">Users</string>
+    <string name="photo">Фото</string>
     <string name="all">Все</string>
     <string name="Favorite">Избранные</string>
 

@@ -1,8 +1,8 @@
 package com.pg13.myapp.di
 
 import com.pg13.myapp.data.api.RemoteApi
-import com.pg13.myapp.data.net.CloudDataSourceComment
-import com.pg13.myapp.data.net.CloudDataSourceCommentImpl
+import com.pg13.myapp.data.net.comment.CloudDataSourceComment
+import com.pg13.myapp.data.net.comment.CloudDataSourceCommentImpl
 import com.pg13.myapp.data.repositories.CommentRepositoryImpl
 import com.pg13.myapp.domain.entites.Comment
 import com.pg13.myapp.domain.repositories.CommentRepository

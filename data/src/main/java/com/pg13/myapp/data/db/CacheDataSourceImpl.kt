@@ -1,6 +1,7 @@
 package com.pg13.myapp.data.db
 
 import com.pg13.myapp.data.entities.local.PostLocal
+import com.pg13.myapp.data.mappers.mapToDomain
 import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.entites.Resource
 import kotlinx.coroutines.flow.Flow
@@ -11,9 +12,6 @@ class CacheDataSourceImpl(
 ): CacheDataSource<Post> {
     override suspend fun getDataList(): List<Post> {
         TODO("Not yet implemented")
-    }
-
-    override suspend fun addOrRemove() {
     }
 
     override suspend fun add(item: Post) {
@@ -29,12 +27,7 @@ class CacheDataSourceImpl(
         emit(Resource.Loading())
 
         val posts = postDao.getAll()
-        val mapPosts = posts.map { Post(it.userId, it.id, it.title, it.body, it.favorite) }
 
-        emit(Resource.Success(mapPosts))
-    }
-
-    override suspend fun remove(item: Post) {
-        TODO("Not yet implemented")
+        emit(Resource.Success(posts.map { it.mapToDomain() }))
     }
 }

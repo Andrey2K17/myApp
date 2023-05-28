@@ -15,24 +15,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/item_post_margin"
-            android:orientation="horizontal"
-            >
+            android:layout_marginHorizontal="@dimen/padding_8dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/loadAllBtn"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_8dp"
                 android:layout_weight="0.5"
-                android:text="@string/all"
-                android:layout_marginEnd="@dimen/item_post_margin"
-                android:layout_height="wrap_content"/>
+                android:text="@string/all" />
 
             <Button
                 android:id="@+id/loadFavoriteBtn"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/Favorite"
-                android:layout_height="wrap_content"/>
+                android:text="@string/Favorite" />
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

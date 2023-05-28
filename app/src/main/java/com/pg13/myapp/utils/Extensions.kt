@@ -50,3 +50,7 @@ fun Context.showErrorDialog(message: String) {
 }
 
 fun Fragment.showErrorDialog(message: String) = requireContext().showErrorDialog(message)
+
+inline fun <reified T> genericCastOrNull(anything: Any): T {
+    return anything as T
+}

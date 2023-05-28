@@ -1,7 +1,6 @@
-package com.pg13.myapp.ui.features.posts
+package com.pg13.myapp.ui.features.postDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -43,7 +42,6 @@ class PostsDetailsFragment : ViewBindingFragment<FragmentPostDetailsBinding>() {
                 viewModel.comments.collect { res ->
                     when (res) {
                         is Resource.Success -> {
-                            Log.d("test123", "data: ${res.data}")
                             adapter.submitList(res.data)
                             binding.refreshLayout.isRefreshing = false
                         }

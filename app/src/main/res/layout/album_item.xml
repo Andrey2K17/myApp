@@ -1,0 +1,33 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="album"
+            type="com.pg13.myapp.entities.AlbumUI" />
+
+        <import type="com.pg13.myapp.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/cardview_shadow_start_color"
+        android:layout_margin="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/padding_8dp"
+                android:layout_weight="1"
+                android:text="@{album.title}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Test title" />
+
+    </LinearLayout>
+</layout>

@@ -1,16 +1,15 @@
 package com.pg13.myapp.ui.features.posts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.pg13.myapp.R
 import com.pg13.myapp.databinding.FragmentPostsBinding
-import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.entites.Resource
 import com.pg13.myapp.entities.PostUI
+import com.pg13.myapp.mappers.mapToDomain
 import com.pg13.myapp.mappers.mapToUI
 import com.pg13.myapp.ui.base.ViewBindingFragment
 import com.pg13.myapp.utils.launchOnLifecycle
@@ -93,14 +92,10 @@ class PostsFragment : ViewBindingFragment<FragmentPostsBinding>() {
     }
 
     private fun adapterOnClick(post: PostUI) {
-        Log.d("test123", "postClick: $post")
-        //val post1 = Post(post.userId, post.id, post.title, post.body, post.favorite)
         findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToPostsDetailsFragment(post))
     }
 
     private fun adapterOnClickFavorite(post: PostUI) {
-        Log.d("test123", "postClickFavorite: $post")
-        val post1 = Post(post.userId, post.id, post.title, post.body, post.favorite)
-        viewModel.addPostFavorite(post1)
+        viewModel.addPostFavorite(post.mapToDomain())
     }
 }

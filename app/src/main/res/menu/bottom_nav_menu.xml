@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/main"
-        android:title="@string/main"
+        android:title="@string/albums"
         android:icon="@drawable/ic_main"/>
     <item
         android:id="@+id/posts"

@@ -1,7 +1,4 @@
-package com.pg13.myapp.ui.features.posts
-
-import com.pg13.myapp.databinding.CommentItemBinding
-import com.pg13.myapp.domain.entites.Comment
+package com.pg13.myapp.ui.features.postDetails
 
 
 import android.view.LayoutInflater
@@ -11,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pg13.myapp.R
+import com.pg13.myapp.databinding.CommentItemBinding
+import com.pg13.myapp.domain.entites.Comment
 
 class CommentAdapter :
     ListAdapter<Comment, CommentAdapter.CommentViewHolder>(CommentDiffCallback) {

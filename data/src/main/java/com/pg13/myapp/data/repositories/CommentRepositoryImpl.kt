@@ -1,6 +1,6 @@
 package com.pg13.myapp.data.repositories
 
-import com.pg13.myapp.data.net.CloudDataSourceComment
+import com.pg13.myapp.data.net.comment.CloudDataSourceComment
 import com.pg13.myapp.domain.entites.Comment
 import com.pg13.myapp.domain.entites.Resource
 import com.pg13.myapp.domain.repositories.CommentRepository

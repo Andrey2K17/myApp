@@ -1,7 +1,9 @@
-package com.pg13.myapp.data.net
+package com.pg13.myapp.data.net.post
 
 import com.pg13.myapp.data.api.RemoteApi
 import com.pg13.myapp.data.db.PostDao
+import com.pg13.myapp.data.mappers.mapToDomain
+import com.pg13.myapp.data.net.CloudDataSource
 import com.pg13.myapp.data.util.networkBoundResource
 import com.pg13.myapp.domain.entites.Post
 import com.pg13.myapp.domain.entites.Resource
@@ -16,7 +18,7 @@ class CloudDataSourcePostImpl(
         {postApi.getPosts()},
         {postDao.getAll()},
         { cloudData, cachedData ->
-            val postsCloud = cloudData.map { Post(it.userId, it.id, it.title, it.body) }
+            val postsCloud = cloudData.map { it.mapToDomain() }
 
             val posts = postsCloud.onEach {
                 it.favorite = cachedData.any{localPost -> localPost.id == it.id}

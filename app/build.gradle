@@ -68,6 +68,9 @@ dependencies {
     implementation navigation.fragment
     implementation navigation.ui
 
+    //Load Image from Internet
+    implementation coil
+
     //Modules
     implementation project(path: ':domain')
     implementation project(path: ':data')
